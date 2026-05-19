@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (!document.head || !document.body) { setTimeout(setup, 100); return; }
         var styleEl = document.createElement('style');
         styleEl.textContent = [
-          '* { cursor: none !important; }',
+          '@media (min-width: 768px) { * { cursor: none !important; } }',
           '.m-xp-sami-border { border-left:3px solid var(--accent) !important; padding-left:18px !important; margin-left:2px !important; }',
           '.m-xp-dates { display: none !important; }',
           '/* OPEN TO WORK — change none to inline-flex to show */',
@@ -308,6 +308,16 @@ document.addEventListener('DOMContentLoaded', async function() {
               var w2 = document.createTreeWalker(edu, NodeFilter.SHOW_TEXT, null, false);
               var n2;
               while (n2 = w2.nextNode()) { if (n2.nodeValue.trim()) n2.nodeValue = 'Education'; }
+              var eduSvg = edu.querySelector('svg');
+              if (eduSvg) {
+                eduSvg.setAttribute('viewBox', '0 0 24 24');
+                eduSvg.setAttribute('fill', 'none');
+                eduSvg.setAttribute('stroke', 'currentColor');
+                eduSvg.setAttribute('stroke-width', '2');
+                eduSvg.setAttribute('stroke-linecap', 'round');
+                eduSvg.setAttribute('stroke-linejoin', 'round');
+                eduSvg.innerHTML = '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>';
+              }
               if (edu.tagName === 'A') edu.href = '#education';
               edu.querySelectorAll('a').forEach(function(a) { a.href = '#education'; });
               edu.setAttribute('data-edu', '1');
